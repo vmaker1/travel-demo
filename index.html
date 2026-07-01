@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>전 세계를, 특별한 할인가로 · 글로벌 여행 멤버십</title>
+<meta name="description" content="여행을 정말 사랑하는 사람을 위한 글로벌 여행 멤버십. 호텔·항공·크루즈를 멤버십 특가로, 쌓이는 포인트로 여행값을 현금처럼 차감.">
+<meta property="og:title" content="전 세계를, 특별한 할인가로 떠나다">
+<meta property="og:description" content="여행을 여러 번 다니는 사람을 위한 멤버십. 쌓이는 포인트로 다음 여행값을 바로 깎아드려요.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fastly.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://fastly.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+  :root{
+    --night:#0d1b2a;        /* 미드나잇 네이비 */
+    --night-2:#132a41;
+    --deep:#0a1420;
+    --gold:#d4a24e;         /* 골드 액센트 */
+    --gold-deep:#b7863a;
+    --cream:#f7f2e8;        /* 크림 배경/텍스트 */
+    --paper:#fffdf8;
+    --ink:#1a2635;
+    --muted:#6a7789;
+    --muted-cream:#c8d2df;
+    --line:#e7ded0;
+    --line-dark:rgba(255,255,255,.14);
+    --ok:#3f9d78;
+    --warn:#c98a3a;
+    --shadow:0 16px 40px rgba(8,17,28,.18);
+    --shadow-sm:0 6px 18px rgba(8,17,28,.1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;}
+  body{
+    font-family:'Pretendard',-apple-system,BlinkMacSystemFont,system-ui,'Apple SD Gothic Neo',sans-serif;
+    background:var(--cream);color:var(--ink);line-height:1.68;
+  }
+  .wrap{max-width:480px;margin:0 auto;background:var(--cream);min-height:100vh;position:relative;overflow-x:hidden;box-shadow:0 0 60px rgba(0,0,0,.15);}
+
+  /* 타이포 */
+  .eyebrow{font-size:13px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-deep);}
+  h1{font-size:33px;line-height:1.22;font-weight:800;letter-spacing:-.02em;}
+  h2{font-size:25px;line-height:1.28;font-weight:800;letter-spacing:-.015em;color:var(--night);}
+  h3{font-size:19px;font-weight:700;color:var(--night);}
+  p{font-size:17px;}
+  .sec{padding:40px 24px;}
+  .sec-tight{padding:30px 24px;}
+
+  /* ── 상단 바 ── */
+  .topbar{
+    position:sticky;top:0;z-index:40;display:flex;align-items:center;justify-content:space-between;
+    padding:14px 22px;background:rgba(13,27,42,.82);backdrop-filter:blur(10px);border-bottom:1px solid var(--line-dark);
+  }
+  .logo{display:flex;align-items:center;gap:9px;color:#fff;font-weight:800;font-size:19px;letter-spacing:.02em;}
+  .logo .m{
+    width:30px;height:30px;border-radius:8px;display:grid;place-items:center;font-size:14px;color:var(--night);
+    background:linear-gradient(135deg,var(--gold),#eac878);
+  }
+  .topbar .join{
+    background:var(--gold);color:var(--night);font-weight:800;font-size:14px;
+    padding:9px 16px;border-radius:100px;border:none;font-family:inherit;
+  }
+
+  /* ── 히어로 (영상/이미지 전면) ── */
+  .hero{
+    position:relative;min-height:560px;display:flex;flex-direction:column;justify-content:flex-end;
+    padding:26px 24px 40px;color:#fff;
+    background:
+      radial-gradient(130% 90% at 75% 15%,rgba(212,162,78,.5),transparent 55%),
+      linear-gradient(200deg,#1b3a5c 0%,#0d1b2a 55%,#0a1420 100%);
+    overflow:hidden;
+  }
+  .hero-photo{
+    position:absolute;inset:0;
+    background:linear-gradient(160deg,#2a5f8a 0%,#1b3a5c 45%,#d4a24e 200%);
+    opacity:.55;
+  }
+  .hero-photo::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(0deg,rgba(10,20,32,.95),rgba(10,20,32,.2) 55%,rgba(10,20,32,.5));
+  }
+  .hero-play{
+    position:absolute;top:70px;left:50%;transform:translateX(-50%);z-index:3;
+    width:74px;height:74px;border-radius:50%;background:rgba(255,255,255,.16);
+    border:1.5px solid rgba(255,255,255,.5);backdrop-filter:blur(4px);
+    display:grid;place-items:center;color:#fff;font-size:24px;
+  }
+  .hero-play::before{
+    content:"";position:absolute;inset:-10px;border-radius:50%;border:1px solid rgba(255,255,255,.25);
+    animation:pulse 2.4s ease-out infinite;
+  }
+  @keyframes pulse{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.5);opacity:0}}
+  .hero-inner{position:relative;z-index:2;}
+  .hero .eyebrow{color:#f0d3a0;}
+  .hero h1{color:#fff;margin-top:10px;text-shadow:0 3px 20px rgba(0,0,0,.35);}
+  .hero .sub{font-size:18px;color:#dce6f2;margin-top:14px;line-height:1.6;}
+  .hero-stats{display:flex;gap:22px;margin-top:26px;}
+  .hero-stats .st b{font-size:24px;font-weight:800;color:var(--gold);display:block;line-height:1.1;}
+  .hero-stats .st small{font-size:13px;color:#b9c6d6;}
+
+  /* ── 신뢰 리본 ── */
+  .ribbon{
+    background:var(--night-2);color:#cdd8e6;padding:16px 24px;
+    display:flex;flex-wrap:wrap;gap:8px 18px;font-size:13.5px;font-weight:600;justify-content:center;
+    border-bottom:1px solid var(--line-dark);
+  }
+  .ribbon span{display:inline-flex;align-items:center;gap:6px;}
+  .ribbon i{color:var(--gold);font-style:normal;}
+
+  /* ── 커뮤니티: 여행지 갤러리 ── */
+  .gallery{display:flex;gap:12px;overflow-x:auto;padding:6px 24px 10px;scroll-snap-type:x mandatory;}
+  .gallery::-webkit-scrollbar{height:0;}
+  .place{
+    flex:none;width:210px;height:270px;border-radius:20px;scroll-snap-align:start;position:relative;
+    display:flex;align-items:flex-end;padding:18px;color:#fff;box-shadow:var(--shadow-sm);overflow:hidden;
+  }
+  .place::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(10,20,32,.8),transparent 55%);}
+  .place .lbl{position:relative;z-index:2;}
+  .place .lbl b{font-size:19px;font-weight:800;display:block;}
+  .place .lbl small{font-size:14px;color:#e0e8f2;}
+  .p1{background:linear-gradient(160deg,#2a6f8a,#4aa0b0 60%,#e0c072);}
+  .p2{background:linear-gradient(160deg,#7a4a6b,#b06f8a 55%,#e0a072);}
+  .p3{background:linear-gradient(160deg,#2a5f6b,#4a9d8a 55%,#d4c072);}
+  .p4{background:linear-gradient(160deg,#3a4a7a,#6f7aad 55%,#d49872);}
+
+  /* ── 커뮤니티: 이벤트 카드 ── */
+  .event{
+    margin:0 24px;border-radius:20px;overflow:hidden;box-shadow:var(--shadow-sm);border:1px solid var(--line);
+    background:var(--paper);
+  }
+  .event-media{
+    height:180px;position:relative;display:flex;align-items:flex-start;padding:16px;
+    background:linear-gradient(150deg,#1b3a5c,#c98a3a 180%);
+  }
+  .event-media::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(10,20,32,.4),transparent 60%);}
+  .event-media .pill{position:relative;z-index:2;background:var(--gold);color:var(--night);font-weight:800;font-size:13px;padding:6px 12px;border-radius:8px;}
+  .event-body{padding:18px 20px 20px;}
+  .event-body h3{margin-bottom:6px;}
+  .event-body p{font-size:15.5px;color:var(--muted);}
+  .event-meta{display:flex;gap:16px;margin-top:12px;font-size:14.5px;color:var(--muted);font-weight:600;}
+
+  /* ── 멤버십 가격표 ── */
+  .guide-lead{font-size:16px;color:var(--ink);line-height:1.7;margin-bottom:22px;}
+  .plans{display:flex;flex-direction:column;gap:16px;}
+  .plan{
+    background:var(--paper);border:1.5px solid var(--line);border-radius:20px;padding:22px;position:relative;
+  }
+  .plan.feature{border-color:var(--gold);box-shadow:0 0 0 4px rgba(212,162,78,.15);}
+  .plan .flag{
+    position:absolute;top:-12px;left:22px;background:var(--gold);color:var(--night);
+    font-size:12.5px;font-weight:800;padding:5px 12px;border-radius:100px;
+  }
+  .plan .name{font-size:15px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-deep);}
+  .plan .cost{margin:8px 0 4px;}
+  .plan .cost b{font-size:30px;font-weight:800;color:var(--night);}
+  .plan .cost span{font-size:16px;color:var(--muted);}
+  .plan .note{font-size:14px;color:var(--muted);}
+  .plan ul{list-style:none;margin-top:16px;display:flex;flex-direction:column;gap:10px;}
+  .plan li{font-size:15.5px;display:flex;gap:9px;align-items:flex-start;line-height:1.5;}
+  .plan li i{color:var(--ok);font-style:normal;flex:none;}
+  .plan .pick{
+    margin-top:18px;width:100%;padding:14px;border-radius:12px;font-size:16px;font-weight:800;font-family:inherit;
+    border:1.5px solid var(--night);background:transparent;color:var(--night);
+  }
+  .plan.feature .pick{background:var(--gold);border-color:var(--gold);color:var(--night);}
+  .plan.top{border-color:var(--night);background:linear-gradient(170deg,#fffdf8,#f3ede1);box-shadow:0 0 0 4px rgba(13,27,42,.08);}
+  .flag-top{background:var(--night)!important;color:var(--gold)!important;}
+  .plan li i.star,.plan li i{--x:0;}
+  .plan .best-for{
+    margin-top:14px;padding:12px 14px;background:#0d1b2a;color:#f0d3a0;border-radius:12px;
+    font-size:14px;line-height:1.5;font-weight:600;
+  }
+  .plan.top .pick{background:var(--night);border-color:var(--night);color:#fff;}
+
+  /* ── 절약 설명 (직관) ── */
+  .how{display:flex;flex-direction:column;gap:14px;margin-top:8px;}
+  .how-row{
+    display:flex;gap:16px;align-items:center;background:var(--paper);
+    border:1px solid var(--line);border-radius:16px;padding:18px 20px;
+  }
+  .how-row .ic{
+    width:52px;height:52px;border-radius:15px;flex:none;display:grid;place-items:center;font-size:24px;
+    background:linear-gradient(135deg,#eef3f0,#f7f2e8);
+  }
+  .how-row b{font-size:17px;color:var(--night);}
+  .how-row p{font-size:15px;color:var(--muted);margin-top:3px;}
+
+  /* ── 포인트 = 현금 섹션 ── */
+  .points{
+    background:linear-gradient(160deg,#0d1b2a,#132a41);border-radius:24px;padding:28px 24px;
+  }
+  .pt-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:stretch;}
+  .pt-card{
+    background:rgba(255,255,255,.06);border:1px solid var(--line-dark);border-radius:16px;
+    padding:18px 14px;text-align:center;color:#fff;
+    display:flex;flex-direction:column;align-items:center;height:100%;
+  }
+  .pt-card.hi{background:linear-gradient(160deg,rgba(212,162,78,.22),rgba(212,162,78,.08));border-color:rgba(212,162,78,.5);}
+  .pt-card small{font-size:12.5px;font-weight:800;letter-spacing:.03em;color:#b9c6d6;display:block;white-space:nowrap;min-height:18px;}
+  .pt-card b{font-size:27px;font-weight:800;color:var(--gold);display:block;margin:8px 0 3px;line-height:1;min-height:27px;}
+  .pt-card span{font-size:14px;color:#dce6f2;display:block;min-height:20px;}
+  .pt-card em{font-size:13px;color:#9fb0c4;font-style:normal;display:block;margin-top:auto;padding-top:10px;width:100%;border-top:1px solid var(--line-dark);}
+  .pt-note{font-size:12.5px;color:#8fa0b5;margin-top:16px;line-height:1.55;}
+
+  /* ── 사업 기회 (현실 고지 포함) ── */
+  .biz{
+    background:linear-gradient(160deg,#0d1b2a,#132a41);color:#fff;border-radius:24px;margin:0;padding:30px 24px;
+  }
+  .biz .eyebrow{color:#f0d3a0;}
+  .biz h2{color:#fff;margin-top:8px;}
+  .biz > p{color:#cdd8e6;font-size:16.5px;margin-top:12px;}
+  .biz-steps{margin-top:22px;display:flex;flex-direction:column;gap:12px;}
+  .biz-step{display:flex;gap:14px;align-items:flex-start;background:rgba(255,255,255,.06);border:1px solid var(--line-dark);border-radius:16px;padding:14px 16px;}
+  .biz-step .n{width:30px;height:30px;border-radius:9px;flex:none;background:var(--gold);color:var(--night);font-weight:800;display:grid;place-items:center;}
+  .biz-step b{font-size:16px;color:#fff;}
+  .biz-step p{font-size:14px;color:#b9c6d6;margin-top:2px;}
+
+  /* ── 공정·정확 고지 박스 ── */
+  .honest{
+    margin:20px 24px;border-radius:20px;padding:22px;background:#fbf3e6;border:1.5px solid #ecd7b3;
+  }
+  .honest h3{color:var(--gold-deep);display:flex;align-items:center;gap:9px;font-size:18px;margin-bottom:4px;}
+  .honest p{font-size:15.5px;color:#5f4e30;line-height:1.72;margin-top:13px;}
+  .honest .foot{margin-top:14px;padding-top:12px;border-top:1px dashed #dcc39a;font-size:13px;color:#8a7550;}
+
+  /* ── FAQ ── */
+  .faq{display:flex;flex-direction:column;gap:0;margin-top:6px;border-top:1px solid var(--line);}
+  .qa{border-bottom:1px solid var(--line);}
+  .qa summary{
+    list-style:none;cursor:pointer;padding:18px 4px;font-size:16.5px;font-weight:700;color:var(--night);
+    display:flex;justify-content:space-between;align-items:center;gap:12px;
+  }
+  .qa summary::-webkit-details-marker{display:none;}
+  .qa summary::after{content:"+";font-size:24px;color:var(--gold-deep);font-weight:400;}
+  .qa[open] summary::after{content:"–";}
+  .qa p{font-size:15.5px;color:var(--muted);padding:0 4px 18px;line-height:1.6;}
+
+  /* ── 최종 CTA ── */
+  .final{
+    text-align:center;padding:44px 28px 40px;color:#fff;
+    background:radial-gradient(120% 80% at 50% 0%,rgba(212,162,78,.35),transparent 60%),linear-gradient(180deg,#0d1b2a,#0a1420);
+  }
+  .final h2{color:#fff;font-size:27px;}
+  .final p{color:#cdd8e6;font-size:16.5px;margin-top:12px;}
+  .final .cta-btn{
+    margin-top:22px;width:100%;padding:17px;border:none;border-radius:14px;font-family:inherit;
+    background:linear-gradient(135deg,var(--gold),var(--gold-deep));color:var(--night);font-size:18px;font-weight:800;
+  }
+  .final .cta-sub{
+    margin-top:12px;width:100%;padding:15px;border:1px solid rgba(255,255,255,.3);border-radius:14px;
+    background:transparent;color:#fff;font-size:15px;font-weight:600;font-family:inherit;
+  }
+  .contact{
+    margin-top:26px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);
+    border-radius:20px;padding:22px;text-align:left;
+  }
+  .c-head{display:flex;align-items:center;gap:13px;}
+  .c-ava{
+    width:48px;height:48px;border-radius:50%;flex:none;display:grid;place-items:center;
+    background:linear-gradient(135deg,var(--gold),#eac878);color:var(--night);font-weight:800;font-size:20px;
+  }
+  .c-head b{font-size:18px;color:#fff;display:block;}
+  .c-head small{font-size:13.5px;color:#b9c6d6;}
+  .c-msg{color:#dce6f2;font-size:15.5px;margin:14px 0 16px;}
+  .c-list{display:flex;flex-direction:column;gap:10px;}
+  .c-item{
+    display:flex;align-items:center;justify-content:space-between;text-decoration:none;
+    background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:13px;
+    padding:14px 16px;
+  }
+  .c-item span{font-size:14.5px;color:#b9c6d6;font-weight:600;}
+  .c-item b{font-size:16.5px;color:var(--gold);font-weight:800;letter-spacing:.01em;}
+  .c-item:active{background:rgba(212,162,78,.14);}
+
+  footer{background:var(--deep);color:#7d8ba0;padding:24px;font-size:12.5px;text-align:center;line-height:1.7;}
+
+  .demo-tag{
+    position:fixed;bottom:14px;left:50%;transform:translateX(-50%);z-index:60;
+    background:rgba(13,27,42,.94);color:#f0d3a0;font-size:12px;font-weight:700;
+    padding:7px 16px;border-radius:100px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- 상단 바 -->
+  <div class="topbar">
+    <div class="logo"><span class="m">M</span> MWR Life</div>
+    <button class="join">가입 안내</button>
+  </div>
+
+  <!-- 히어로 -->
+  <header class="hero">
+    <div class="hero-photo"></div>
+    <button class="hero-play" aria-label="소개 영상 재생">▶</button>
+    <div class="hero-inner">
+      <div class="eyebrow">글로벌 여행 멤버십</div>
+      <h1>전 세계를,<br>특별한 할인가로 떠나다</h1>
+      <p class="sub">호텔·항공·크루즈를 멤버십 특가로.
+        <b>1년에 여러 번 떠나는, 여행을 정말 사랑하는 사람</b>일수록 혜택이 커집니다.</p>
+      <div class="hero-stats">
+        <div class="st"><b>150+</b><small>서비스 국가</small></div>
+        <div class="st"><b>10년+</b><small>운영 업력</small></div>
+        <div class="st"><b>30만+</b><small>글로벌 회원</small></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- 신뢰 리본 -->
+  <div class="ribbon">
+    <span><i>✓</i> 미국·유럽 여행사 라이선스</span>
+    <span><i>✓</i> IATA·ETOA 인증</span>
+    <span><i>✓</i> Allianz 여행자 보험</span>
+  </div>
+
+  <!-- ══ 커뮤니티 축 ══ -->
+  <section class="sec">
+    <div class="eyebrow">회원들이 떠난 곳</div>
+    <h2 style="margin-top:8px">전 세계가 회원의 무대</h2>
+    <p style="color:var(--muted);margin-top:10px">회원들이 실제로 다녀온 여행지 일부. 사진을 옆으로 넘겨보세요.</p>
+  </section>
+  <div class="gallery">
+    <div class="place p1"><div class="lbl"><b>발리</b><small>리조트 · 5박</small></div></div>
+    <div class="place p2"><div class="lbl"><b>산토리니</b><small>절벽 호텔 · 4박</small></div></div>
+    <div class="place p3"><div class="lbl"><b>몰디브</b><small>수상 빌라 · 6박</small></div></div>
+    <div class="place p4"><div class="lbl"><b>두바이</b><small>도심 · 3박</small></div></div>
+  </div>
+
+  <!-- 커뮤니티: 글로벌 이벤트 -->
+  <section class="sec-tight">
+    <div class="eyebrow">회원 커뮤니티</div>
+    <h2 style="margin:8px 0 18px">혼자가 아니라, 함께</h2>
+  </section>
+  <div class="event">
+    <div class="event-media"><span class="pill">글로벌 이벤트</span></div>
+    <div class="event-body">
+      <h3>Elevation — 안탈리아 회원 모임</h3>
+      <p>세계 각국 회원들이 한자리에 모이는 정기 행사. 여행 정보를 나누고, 서로의 경험을 잇는 자리.</p>
+      <div class="event-meta"><span>📍 튀르키예 벨렉</span><span>🌍 40개국+ 참가</span></div>
+    </div>
+  </div>
+
+  <!-- ══ 사업 설명 축: 멤버십 ══ -->
+  <section class="sec">
+    <div class="eyebrow">멤버십</div>
+    <h2 style="margin:8px 0 6px">나에게 맞는 등급 고르기</h2>
+    <p style="color:var(--muted);margin-bottom:14px">가격과 조건을 숨김 없이 공개합니다.<br>(표기는 USD 기준 · 실제 청구는 환율 적용)</p>
+    <p class="guide-lead">등급을 고르는 기준은 사실 하나예요. <b>얼마나 자주 여행하느냐</b>죠. 1년에 여러 번 떠나는 편이라면 상위 등급이 유리하고, 반대로 여행이 뜸하다면 매월 나가는 구독료가 아낀 돈보다 커질 수 있어요. 그러니 아래 등급을 천천히 비교하면서 신중하게 골라주세요.</p>
+
+    <div class="plans">
+      <div class="plan">
+        <div class="name">Guest</div>
+        <div class="cost"><b>무료</b></div>
+        <div class="note">부담 없이 둘러보기</div>
+        <ul>
+          <li><i>✓</i> 호텔 할인가 열람</li>
+          <li><i>✓</i> 플랫폼 미리보기</li>
+        </ul>
+        <button class="pick">무료로 시작</button>
+      </div>
+
+      <div class="plan">
+        <div class="name">VIP</div>
+        <div class="cost"><b>$19.97</b><span> / 월</span></div>
+        <div class="note">연 $199 · 가볍게 시작하기 좋은 등급</div>
+        <ul>
+          <li><i>✓</i> 깊은 호텔 할인가</li>
+          <li><i>✓</i> 150% 최저가 보장</li>
+          <li><i>✓</i> 동반자 1명 등록 — 그 사람도 회원가로 예약</li>
+          <li><i>✓</i> 예약 시 여행 크레딧 적립</li>
+        </ul>
+        <button class="pick">VIP 시작하기</button>
+      </div>
+
+      <div class="plan feature">
+        <div class="flag">가장 인기</div>
+        <div class="name">Elite</div>
+        <div class="cost"><b>$119.97</b><span> / 월</span></div>
+        <div class="note">가입비 $120 별도 · 대부분이 선택하는 등급</div>
+        <ul>
+          <li><i>✓</i> VIP 혜택 전체 포함</li>
+          <li><i>✓</i> 엘리트 전용 특가</li>
+          <li><i style="color:var(--gold-deep)">★</i> <b>매월 120 포인트 적립 = $120어치</b></li>
+          <li><i>✓</i> 동반자 4명까지 등록 — 가족도 회원가로 예약</li>
+        </ul>
+        <button class="pick">Elite 시작하기</button>
+      </div>
+
+      <div class="plan top">
+        <div class="flag flag-top">여행 매니아 추천</div>
+        <div class="name" style="color:var(--night)">Elite Turbo</div>
+        <div class="cost"><b>$119.97</b><span> / 월 + Turbo $247</span></div>
+        <div class="note">Elite에 Turbo 애드온(일회성)을 더한 최상위 구성</div>
+        <ul>
+          <li><i>✓</i> Elite 혜택 전체 포함</li>
+          <li><i style="color:var(--gold-deep)">★</i> <b>매월 240 로열티 포인트 (2배!)</b></li>
+          <li><i>✓</i> 터보 회원 전용 호텔 특가</li>
+          <li><i>✓</i> 6개월마다 동반 여행(flex traveler)</li>
+        </ul>
+        <p class="best-for">✈️ 1년에 여러 번 떠나는 분일수록 포인트 적립만으로 본전을 넘길 가능성이 큽니다.</p>
+        <button class="pick">Elite Turbo 알아보기</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 절약 원리 (직관) -->
+  <section class="sec-tight">
+    <div class="eyebrow">어떻게 아껴지나요</div>
+    <h2 style="margin:8px 0 16px">복잡하지 않습니다</h2>
+    <div class="how">
+      <div class="how-row"><div class="ic">🏨</div><div><b>멤버십 특가로 예약</b><p>일반 사이트엔 안 열리는 회원 전용 특가로 호텔·항공을 잡습니다.</p></div></div>
+      <div class="how-row"><div class="ic">💳</div><div><b>예약할수록 포인트 적립</b><p>포인트와 여행 크레딧이 쌓여 다음 예약 금액을 깎아줍니다.</p></div></div>
+      <div class="how-row"><div class="ic">🧮</div><div><b>직접 비교해보기</b><p>같은 호텔을 다른 사이트와 나란히 비교할 수 있게 보여줍니다.</p></div></div>
+    </div>
+  </section>
+
+  <!-- 포인트 = 현금처럼 -->
+  <section class="sec-tight">
+    <div class="points">
+      <div class="eyebrow" style="color:#f0d3a0">쌓이는 포인트</div>
+      <h2 style="color:#fff;margin:8px 0 6px">포인트 1점 = <span style="color:var(--gold)">$1</span>,<br>여행값에서 현금처럼 차감</h2>
+      <p style="color:#cdd8e6;font-size:16px;margin-bottom:20px">매달 자동으로 쌓이는 로열티 포인트를, 다음 예약할 때 결제 금액에서 바로 깎을 수 있어요.</p>
+
+      <div class="pt-grid">
+        <div class="pt-card">
+          <small>Elite</small>
+          <b>월 120P</b>
+          <span>= 매달 $120어치</span>
+          <em>1년이면 약 $1,440</em>
+        </div>
+        <div class="pt-card hi">
+          <small>Elite Turbo</small>
+          <b>월 240P</b>
+          <span>= 매달 $240어치</span>
+          <em>1년이면 약 $2,880</em>
+        </div>
+      </div>
+      <p class="pt-note">※ 포인트는 현금 인출은 안 되고, 여행 예약 금액을 깎는 데 사용해요. 회원 자격을 유지하는 동안 소멸되지 않습니다. 서비스·상품에 따라 사용 한도가 있을 수 있어요.</p>
+    </div>
+  </section>
+
+  <!-- ══ 사업 기회 ══ -->
+  <section class="sec">
+    <div class="biz">
+      <div class="eyebrow">비즈니스 기회</div>
+      <h2>여행을 즐기며, 소개로 수익도</h2>
+      <p>여행 혜택을 주변에 소개하고, 실제 멤버십 판매에 따라 수수료를 받는 '라이프스타일 앰버서더' 활동도 선택할 수 있습니다.</p>
+      <div class="biz-steps">
+        <div class="biz-step"><span class="n">1</span><div><b>내가 먼저 회원이 되기</b><p>직접 써보고 좋은 점을 경험합니다.</p></div></div>
+        <div class="biz-step"><span class="n">2</span><div><b>주변에 소개하기</b><p>여행 좋아하는 지인에게 멤버십을 안내합니다.</p></div></div>
+        <div class="biz-step"><span class="n">3</span><div><b>판매에 따른 수수료</b><p>실제 멤버십이 판매될 때 커미션이 발생합니다.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 공정·정확 고지 (차별점) ══ -->
+  <div class="honest">
+    <h3>⚖️ 결정 전에, 솔직하게 알려드립니다</h3>
+    <p>이 멤버십은 여행을 여러 번 다니는 사람에게 맞는 서비스예요. 자주 떠날수록 할인과 포인트로 구독료 이상을 아낄 수 있지만, 반대로 구독료만 내고 정작 여행을 못 가면 그대로 손해가 됩니다. 그래서 가입 전에 <b>'나는 앞으로 1년에 몇 번이나 여행할까'</b>를 꼭 스스로에게 물어보고 신중하게 결정하시길 권해요.</p>
+    <p>또 하나, 이 멤버십에는 회원이 다른 사람에게 소개·추천해 함께 혜택을 얻는 구조도 있어요. 소개 활동은 어디까지나 선택이고, 큰 수익을 기대하고 시작하는 건 권하지 않습니다. 실제로 대부분은 큰 수익을 내지 못하고, 결과는 개인이 얼마나 활동하느냐에 따라 크게 달라지니까요.</p>
+    <p>마지막으로, 가입 전에 같은 호텔을 일반 예약 사이트와 직접 비교해서 실제로 얼마나 절약되는지 확인해보시길 권해요. 그렇게 하면 나에게 정말 이득인지 스스로 판단할 수 있어요.</p>
+    <div class="foot">이 페이지는 정보 제공용이며, 특정 국가에서는 회원 소개형 판매·여행업 관련 등록 요건이 다를 수 있습니다. 가입은 본인 판단과 책임하에 결정하세요.</div>
+  </div>
+
+  <!-- FAQ -->
+  <section class="sec-tight">
+    <div class="eyebrow">자주 묻는 질문</div>
+    <h2 style="margin:8px 0 6px">궁금한 점</h2>
+    <div class="faq">
+      <details class="qa"><summary>정말 저렴한가요?</summary><p>호텔·시기에 따라 다릅니다. 일반 사이트보다 쌀 때도, 비슷할 때도 있어요. 그래서 예약 전 직접 비교를 권합니다.</p></details>
+      <details class="qa"><summary>여행을 안 가면 손해인가요?</summary><p>구독형이라 여행 일수가 적으면 구독료가 절약분을 넘을 수 있습니다. 자주 여행하는 분께 유리한 모델입니다.</p></details>
+      <details class="qa"><summary>꼭 소개(사업)를 해야 하나요?</summary><p>아니요. 회원 혜택만 쓰고 아무도 소개하지 않아도 됩니다. 앰버서더 활동은 선택입니다.</p></details>
+      <details class="qa"><summary>해지는 어떻게 하나요?</summary><p>다음 결제일 전 지정된 방법으로 해지 요청을 해야 합니다. 해지 절차와 환불 조건을 가입 전 꼭 확인하세요.</p></details>
+    </div>
+  </section>
+
+  <!-- 최종 CTA -->
+  <section class="final">
+    <h2>먼저 무료로 둘러보세요</h2>
+    <p>가입비 없이 회원가를 열람하고, 직접 비교한 뒤 결정하면 됩니다.</p>
+    <button class="cta-btn" onclick="alert('프로토타입입니다 — 실제 가입 흐름으로 연결됩니다.')">무료 Guest로 시작하기</button>
+
+    <div class="contact">
+      <div class="c-head">
+        <div class="c-ava">영</div>
+        <div>
+          <b>영도씨</b>
+          <small>여행 멤버십 안내 담당</small>
+        </div>
+      </div>
+      <p class="c-msg">궁금한 점, 어떤 등급이 맞을지 편하게 물어보세요 🙂</p>
+      <div class="c-list">
+        <a class="c-item" href="tel:010-3391-7923"><span>📱 휴대폰</span><b>010-3391-7923</b></a>
+        <a class="c-item" href="tel:02-773-9066"><span>☎️ 전화</span><b>02-773-9066</b></a>
+        <a class="c-item" href="mailto:cruises@kakao.com"><span>✉️ 이메일</span><b>cruises@kakao.com</b></a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    MWR Life 소개 페이지 · 프로토타입<br>
+    본 페이지의 수치·혜택은 공개 자료를 바탕으로 한 예시이며, 실제 조건은 공식 채널에서 확인하세요.
+  </footer>
+
+</div>
+
+<div class="demo-tag">프로토타입 · 눌러보며 확인하세요</div>
+</body>
+</html>
