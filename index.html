@@ -263,15 +263,16 @@
   .c-head b{font-size:18px;color:#fff;display:block;}
   .c-head small{font-size:13.5px;color:#b9c6d6;}
   .c-msg{color:#dce6f2;font-size:15.5px;margin:14px 0 16px;}
-  .c-list{display:flex;flex-direction:column;gap:10px;}
-  .c-item{
-    display:flex;align-items:center;justify-content:space-between;text-decoration:none;
-    background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:13px;
-    padding:14px 16px;
+  .c-list{display:flex;flex-direction:column;gap:11px;}
+  .c-btn{
+    display:flex;align-items:center;justify-content:center;gap:9px;text-decoration:none;
+    padding:16px;border-radius:14px;font-size:16.5px;font-weight:800;letter-spacing:.01em;
   }
-  .c-item span{font-size:14.5px;color:#b9c6d6;font-weight:600;}
-  .c-item b{font-size:16.5px;color:var(--gold);font-weight:800;letter-spacing:.01em;}
-  .c-item:active{background:rgba(212,162,78,.14);}
+  .c-btn .ci{font-size:19px;}
+  .c-btn.kakao{background:#FEE500;color:#3C1E1E;}
+  .c-btn.kakao:active{background:#f2d900;}
+  .c-btn.email{background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.25);}
+  .c-btn.email:active{background:rgba(255,255,255,.16);}
 
   footer{background:var(--deep);color:#7d8ba0;padding:24px;font-size:12.5px;text-align:center;line-height:1.7;}
 
@@ -492,9 +493,8 @@
       </div>
       <p class="c-msg">궁금한 점, 어떤 등급이 맞을지 편하게 물어보세요 🙂</p>
       <div class="c-list">
-        <a class="c-item" href="tel:010-3391-7923"><span>📱 휴대폰</span><b>010-3391-7923</b></a>
-        <a class="c-item" href="tel:02-773-9066"><span>☎️ 전화</span><b>02-773-9066</b></a>
-        <a class="c-item" href="mailto:cruises@kakao.com"><span>✉️ 이메일</span><b>cruises@kakao.com</b></a>
+        <a class="c-btn kakao" href="https://open.kakao.com/o/s0gcD1Bi" target="_blank" rel="noopener"><span class="ci">💬</span> 카카오톡으로 문의하기</a>
+        <a class="c-btn email" href="mailto:cruises@kakao.com"><span class="ci">✉️</span> 이메일로 문의하기</a>
       </div>
     </div>
   </section>
